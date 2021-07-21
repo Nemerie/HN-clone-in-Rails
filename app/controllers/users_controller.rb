@@ -1,11 +1,6 @@
 class UsersController < ApplicationController
-  #def new
-  #  @user = User.new
-
-  #  render :login
-  #end
-
   def login
+    render :layout => false
   end
 
   def create

@@ -1,42 +1,90 @@
-<h1>Log In</h1>
-<%= form_with(url: login_path, scope: :session, local: true) do |f| %>
-  <div>
-    <%= f.label :email %>
-    <%= f.text_field :email, autofocus: true %>
-  </div>
-  <div>
-    <%= f.label :password %>
-    <%= f.password_field :password %>
-  </div>
-  <div>
-    <%= f.submit "Log In" %>
-  </div>
+<% if notice %>
+  <%= notice %>
+<% end %>
+	
+<% if alert %>
+  <%= alert %>
+  <br>
+  <br>
 <% end %>
 
+<b>Login</b>
 <br>
 <br>
-
-<h1>Sign Up</h1>
-
+<%= form_with(url: login_path, scope: :session, local: true) do |f| %>
+  <table border="0">
+    <tbody>
+      <tr>
+        <td>
+          <%= f.label :name %>
+        </td>
+        <td>
+          <%= f.text_field :name, size: "20", autocorrect: "off", spellcheck: "false", autocapitalize: "off", autofocus: true %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label :email %>
+        </td>
+        <td>
+          <%= f.text_field :email, size: "20", autocorrect: "off", spellcheck: "false", autocapitalize: "off", autofocus: true %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label :password %>
+        </td>
+        <td>
+          <%= f.password_field :password, size: "20"%>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <%= f.submit "login" %>
+<% end %>
+<br>
+<br>
+<b>Create Account</b>
+<br>
+<br>
 <%= form_with(model: @user, url: signup_path, local: true) do |f| %>
-  <div>
-    <%= f.label :name %>
-    <%= f.text_field :name, autofocus: true %>
-  </div>
-  <div>
-    <%= f.label :email %>
-    <%= f.text_field :email %>
-  </div>
-
-  <div>
-    <%= f.label :password %>
-    <%= f.password_field :password %>
-  </div>
-  <div>
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation %>
-  </div>
-  <div>
-    <%= f.submit "Sign up!" %>
-  </div>
+  <table border="0">
+    <tbody>
+      <tr>
+        <td>
+          <%= f.label :name %>
+        </td>
+        <td>
+          <%= f.text_field :name, size: "20", autocorrect: "off", spellcheck: "false", autocapitalize: "off", autofocus: true %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label :email %>
+        </td>
+        <td>
+          <%= f.text_field :email, size: "20", autocorrect: "off", spellcheck: "false", autocapitalize: "off", autofocus: true %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label :password %>
+        </td>
+        <td>
+          <%= f.password_field :password, size: "20"%>
+        </td>
+      </tr>
+      <tr>
+        <td>
+        <%= f.label :password_confirmation %>
+      </td>
+        <td>
+          <%= f.password_field :password_confirmation %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <%= f.submit "Sign up!" %>
 <% end %>
