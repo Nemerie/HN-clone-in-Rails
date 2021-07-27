@@ -1,0 +1,52 @@
+<tr id="pagespace" title="" style="height:10px"></tr>
+<tr>
+	<td>
+		<table border="0" cellpadding="0" cellspacing="0" class="itemlist">
+      <tbody>
+        <% @posts.each_with_index do |post, index| %>
+          <tr class="athing">
+      		  <td align="right" valign="top" class="title">
+      			  <span class="rank">
+                <%= (index + 1).to_s + '.' %>
+              </span>
+      		  </td>
+      		  <td valign="top" class="votelinks">
+      		    <center>
+      				  <div class="votearrow" title="upvote"></div>
+      		    </center>
+      	    </td>
+      		  <td class="title">
+              <a href="<%= post.url.to_s %>" class="storylink">
+                <%= post.title %>
+              </a>
+      			  <span class="sitebit comhead">(<span class="sitestr"><%= URI(post.url).host %></span>)</span>
+      		  </td>
+      	  </tr>
+
+          <tr>
+          <td colspan="2"></td>
+          <td class="subtext"> 
+            <a href="users/<%= post.user.id %>" class="hnuser">by <%= post.user.name %></a> 
+            <span class="age">
+              <a href="posts/<%= post.id %>"><%= time_ago_in_words(post.created_at) %> ago</a>
+            </span> 
+            <span></span>
+          | hide
+          | <a href="posts/<%= post.id %>">comments</a>
+          </td>
+        </tr>
+
+        <tr class="morespace" style="height:10px"></tr>
+
+        <% end %>
+
+        <tr>
+          <td colspan="2"></td>
+          <td class="title">
+            <a href="news?p=2" class="morelink" rel="next">More</a>
+          </td>
+        </tr>
+			</tbody>
+		</table>
+  </td>
+</tr>

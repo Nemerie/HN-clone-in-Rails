@@ -1,0 +1,28 @@
+<tr>
+<td>
+<%= form_with(model: @post, url: submit_path, local: true) do |f| %>
+  <table border="0">
+    <tbody>
+      <tr>
+        <td>title</td>
+        <td>
+          <%= f.text_field :title, type: "text", size: "50" %>
+          <span style="margin-left:10px"></span>
+        </td>
+      </tr>
+      <tr>
+        <td>url</td>
+        <td>
+          <%= f.text_field :url, type: "url", size: "50" %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+        <%= f.submit "submit" %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+<% end %>
+</td>
+</tr>
