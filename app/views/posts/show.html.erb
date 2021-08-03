@@ -8,9 +8,8 @@
         </td>
         <td valign="top" class="votelinks">
           <center>
-            <a onclick="" href="">
-              <div class="votearrow" title="upvote"></div>
-            </a>
+            <%= link_to content_tag(:div, '', class: "votearrow", title: "upvote"),
+                        "/posts/#{@post.id}/upvote", method: :post %>
           </center>
         </td>
         <td class="title">
@@ -24,6 +23,7 @@
       <tr>
         <td colspan="2"></td>
         <td class="subtext">
+          <%= pluralize(@post.votes_count, 'point') %>
           by
           <a href="/<%= @post.user.id %>" class="hnuser">
             <font color="#3c963c">
@@ -71,18 +71,18 @@
               <tbody>
                 <tr>
                   <td class="ind">
-                    <img src="s.gif" height="1" width="<%= 40 * depth %>">
+                    <img src="/s.gif" height="1" width="<%= 40 * depth %>">
                   </td>
-                <td valign="top" class="votelinks">
-                  <center>
-                    <a onclick="return false" href="">
-                      <div class="votearrow" title="upvote"></div>
-                    </a>
-                  </center>
-                </td>
+                  <td valign="top" class="votelinks">
+                    <center>
+                      <%= link_to content_tag(:div, '', class: "votearrow", title: "upvote"),
+                                  "/comments/#{comment.id}/upvote", method: :post %>
+                    </center>
+                  </td>
               <td class="default">
                 <div style="margin-top:2px; margin-bottom:-10px;">
                   <span class="comhead">
+                    <%= pluralize(comment.votes_count, 'point') %> by
                     <a href="/user/<%= comment.user.id %>" class="hnuser">
                       <%= comment.user.name %>
                     </a>

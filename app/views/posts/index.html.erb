@@ -10,11 +10,12 @@
                 <%= (index + 1).to_s + '.' %>
               </span>
       		  </td>
-      		  <td valign="top" class="votelinks">
-      		    <center>
-      				  <div class="votearrow" title="upvote"></div>
-      		    </center>
-      	    </td>
+            <td valign="top" class="votelinks">
+              <center>
+                <%= link_to content_tag(:div, '', class: "votearrow", title: "upvote"),
+                            "posts/#{post.id}/upvote", method: :post %>
+              </center>
+            </td>
       		  <td class="title">
               <a href="<%= post.url.to_s %>" class="storylink">
                 <%= post.title %>
@@ -26,6 +27,7 @@
           <tr>
           <td colspan="2"></td>
           <td class="subtext"> 
+            <%= pluralize(post.votes_count, 'point') %>
             <a href="users/<%= post.user.id %>" class="hnuser">by <%= post.user.name %></a> 
             <span class="age">
               <a href="posts/<%= post.id %>"><%= time_ago_in_words(post.created_at) %> ago</a>

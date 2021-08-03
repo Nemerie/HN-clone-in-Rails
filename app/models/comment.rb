@@ -8,4 +8,9 @@ class Comment < ApplicationRecord
   validates :content, presence: true, length: { maximum: 1000 }
 
   has_many :comments
+  has_many :votes, as: :votable
+
+  def votes_count
+    votes.length
+  end
 end

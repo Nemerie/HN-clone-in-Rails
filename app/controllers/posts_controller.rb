@@ -22,8 +22,16 @@ class PostsController < ApplicationController
     @posts = Post.order('created_at DESC').paginate(page: @page, per_page: 30)
   end
 
-  def destroy
-    @post.destroy
+  def upvote
+    votable = {type: 'Post', id: params[:id]}
+
+    if current_user.upvoted?(votable)
+      current_user.remove_vote(votable)
+    else
+      current_user.upvote(votable)
+    end
+
+    redirect_back(fallback_location: root_path)
   end
 
   private
