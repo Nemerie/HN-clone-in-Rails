@@ -2,6 +2,8 @@ class User < ApplicationRecord
   has_many :posts
   has_many :comments
 
+  before_save   :downcase_email
+
   has_secure_password
 
 	validates :name, presence: true,
@@ -14,4 +16,9 @@ class User < ApplicationRecord
                     uniqueness: true
 
   validates :password, presence: true, length: { minimum: 6 }
+
+  private
+    def downcase_email
+      self.email = email.downcase
+    end
 end
