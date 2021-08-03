@@ -2,19 +2,19 @@
 <td>
   <table class="fatitem" border="0">
     <tbody>
-      <tr class="athing" id="27972950">
+      <tr class="athing" id="">
         <td align="right" valign="top" class="title">
           <span class="rank"></span>
         </td>
         <td valign="top" class="votelinks">
           <center>
-            <a id="up_27972950" onclick="return vote(event, this, &quot;up&quot;)" href="">
+            <a onclick="" href="">
               <div class="votearrow" title="upvote"></div>
             </a>
           </center>
         </td>
         <td class="title">
-          <a href="<%= @post.url.to_s %>" class="storylink">
+          <a href="/<%= @post.url.to_s %>" class="storylink">
             <%= @post.title %>
           </a>
           <span class="sitebit comhead">(<span class="sitestr"><%= URI(@post.url).host %></span>)</span>
@@ -25,13 +25,13 @@
         <td colspan="2"></td>
         <td class="subtext">
           by
-          <a href="user?id=Hell_World" class="hnuser">
+          <a href="/<%= @post.user.id %>" class="hnuser">
             <font color="#3c963c">
               <%= @post.user.name %>
             </font>
           </a>
           <span class="age" title="2021-07-27T14:36:50">
-            <a href="item?id=27972950">
+            <a href="/<%= @post.id %>">
               <%= time_ago_in_words(@post.created_at) %> ago
             </a>
           </span>
@@ -48,7 +48,8 @@
         <td colspan="2"></td>
         <td>
           <%= form_with(model: @comment, url: '/comments/new', local: true) do |f| %>
-            <%= f.text_area :text, rows: "6", cols: "60" %>
+            <input type="hidden" name="post" value="<%= @post.id %>" />
+            <%= f.text_area :content, rows: "6", cols: "60" %>
             <br><br>
             <%= f.submit "submit" %>
           <% end %>
@@ -58,149 +59,61 @@
   </table>
   <br><br>
 
+  
   <table border="0" class="comment-tree">
-    <tbody><tr class="athing comtr" id="27974449"><td>
-                <table border="0">  <tbody><tr>    <td class="ind"><img src="s.gif" height="1" width="0"></td><td valign="top" class="votelinks">
-      <center><a id="up_27974449" onclick="return vote(event, this, &quot;up&quot;)" href="vote?id=27974449&amp;how=up&amp;auth=e62e5a34041d2ad761ec725c6da3606065cad0f0&amp;goto=item%3Fid%3D27972950#27974449"><div class="votearrow" title="upvote"></div></a></center>    </td><td class="default"><div style="margin-top:2px; margin-bottom:-10px;"><span class="comhead">
-          <a href="user?id=modeless" class="hnuser">modeless</a> <span class="age" title="2021-07-27T16:37:49"><a href="item?id=27974449">1 hour ago</a></span> <span id="unv_27974449"></span><span class="par"></span> <a class="togg" n="3" href="javascript:void(0)" onclick="return toggle(event, 27974449)">[–]</a>          <span class="storyon"></span>
-                  </span></div><br><div class="comment">
-                  <span class="commtext c00">Agents trained in simulation like this often flail about seemingly randomly, and when they achieve their goals it seems almost accidental. Rather than this being some kind of limitation of the learning algorithm, I think it might be the optimal strategy, and  humans would behave that way too if there was no such thing as fatigue or pain.<p>If we want agents to behave more realistically and move with more apparent intention we need cost functions that include a "pain" and/or fatigue term to penalize flailing behavior. But that adds hyperparameters that need to be carefully tuned to balance penalties with rewards, otherwise training will be unstable or simply fail.</p><p>I wonder if there's a principled way to determine an appropriate cost function without manual tuning. Did evolution serve as the "manual" optimizer that generated a precisely tuned cost function for the human brain? Or did evolution discover a generally applicable method for automatically generating cost functions, which the brain then applies to whatever input it gets?
-              </p><div class="reply">        <p><font size="1">
-                      <u><a href="reply?id=27974449&amp;goto=item%3Fid%3D27972950%2327974449">reply</a></u>
-                  </font>
-      </p></div></span></div></td></tr>
-        </tbody></table></td></tr>
-                <tr class="athing comtr" id="27974627"><td>
-                <table border="0">  <tbody><tr>    <td class="ind"><img src="s.gif" height="1" width="40"></td><td valign="top" class="votelinks">
-      <center><a id="up_27974627" onclick="return vote(event, this, &quot;up&quot;)" href="vote?id=27974627&amp;how=up&amp;auth=286c1c1183cc6f600cc1b2536aa615009ae5cb6b&amp;goto=item%3Fid%3D27972950#27974627"><div class="votearrow" title="upvote"></div></a></center>    </td><td class="default"><div style="margin-top:2px; margin-bottom:-10px;"><span class="comhead">
-          <a href="user?id=nostrademons" class="hnuser">nostrademons</a> <span class="age" title="2021-07-27T16:52:39"><a href="item?id=27974627">58 minutes ago</a></span> <span id="unv_27974627"></span><span class="par"></span> <a class="togg" n="1" href="javascript:void(0)" onclick="return toggle(event, 27974627)">[–]</a>          <span class="storyon"></span>
-                  </span></div><br><div class="comment">
-                  <span class="commtext c00">Watching my 3-year-old, I suspect humans <i>do</i> behave this way, and without regards to pain or fatigue.  He'll hit himself on the head with duplos or bang his head against the wall just to see what happens.  The pain is just one more signal for reinforcement learning.<p>I recall a paper in a non-CS journal (psych or neuroscience) that posited that the optimal way to gain large quantities of information about an uncertain environment is to simply perturb the environment in random ways and see what happens.  Young children will often do lots of seemingly stupid or random things (see the r/KidsAreFuckingStupid subreddit) with the trust that if it's actually a life-ending decision their parent will stop them.
-              </p><div class="reply">        <p><font size="1">
-                      <u><a href="reply?id=27974627&amp;goto=item%3Fid%3D27972950%2327974627">reply</a></u>
-                  </font>
-      </p></div></span></div></td></tr>
-        </tbody></table></td></tr>
-            <tr class="athing comtr" id="27974669"><td>
-                <table border="0">  <tbody><tr>    <td class="ind"><img src="s.gif" height="1" width="40"></td><td valign="top" class="votelinks">
-      <center><a id="up_27974669" onclick="return vote(event, this, &quot;up&quot;)" href="vote?id=27974669&amp;how=up&amp;auth=afbbfc5a45d0b0193895610ff506ebaf41412264&amp;goto=item%3Fid%3D27972950#27974669"><div class="votearrow" title="upvote"></div></a></center>    </td><td class="default"><div style="margin-top:2px; margin-bottom:-10px;"><span class="comhead">
-          <a href="user?id=eutectic" class="hnuser">eutectic</a> <span class="age" title="2021-07-27T16:55:41"><a href="item?id=27974669">55 minutes ago</a></span> <span id="unv_27974669"></span><span class="par"></span> <a class="togg" n="1" href="javascript:void(0)" onclick="return toggle(event, 27974669)">[–]</a>          <span class="storyon"></span>
-                  </span></div><br><div class="comment">
-                  <span class="commtext c00">It's proven that if you want polynomial sample complexity in the size of the state space you need directed exploration. The algorithms 'flail' because they are initialized with random policies.</span>
-              <div class="reply">        <p><font size="1">
-                      <u><a href="reply?id=27974669&amp;goto=item%3Fid%3D27972950%2327974669">reply</a></u>
-                  </font>
-      </p></div></div></td></tr>
-        </tbody></table></td></tr>
-                            <tr class="athing comtr" id="27975302"><td>
-                <table border="0">  <tbody><tr>    <td class="ind"><img src="s.gif" height="1" width="0"></td><td valign="top" class="votelinks">
-      <center><a id="up_27975302" onclick="return vote(event, this, &quot;up&quot;)" href="vote?id=27975302&amp;how=up&amp;auth=aca0db774a9d43ababb2d75a277891946b5a966a&amp;goto=item%3Fid%3D27972950#27975302"><div class="votearrow" title="upvote"></div></a></center>    </td><td class="default"><div style="margin-top:2px; margin-bottom:-10px;"><span class="comhead">
-          <a href="user?id=jashmenn" class="hnuser">jashmenn</a> <span class="age" title="2021-07-27T17:44:48"><a href="item?id=27975302">6 minutes ago</a></span> <span id="unv_27975302"></span><span class="par"></span> <a class="togg" n="1" href="javascript:void(0)" onclick="return toggle(event, 27975302)">[–]</a>          <span class="storyon"></span>
-                  </span></div><br><div class="comment">
-                  <span class="commtext c5a">- "Tag" - shoots other player<p>- "Capture the flag" - shoots other player</p><p>- "Hide and seek" - shoots other player</p><p>As colorful as this world is, these capabilities terrify me because they're obviously going to be used as powerful weapons of war.</p><p>It is a tiny technological leap to install this learning into a Boston Robotics Spot attached to a firearm.</p><p>I'm pro-tech, pro-crypto, pro-ml and these videos fill me with dread.
-              </p><div class="reply">        <p><font size="1">
-                      <u><a href="reply?id=27975302&amp;goto=item%3Fid%3D27972950%2327975302">reply</a></u>
-                  </font>
-      </p></div></span></div></td></tr>
-        </tbody></table></td></tr>
-                      <tr class="athing comtr" id="27974078"><td>
-                <table border="0">  <tbody><tr>    <td class="ind"><img src="s.gif" height="1" width="0"></td><td valign="top" class="votelinks">
-      <center><a id="up_27974078" onclick="return vote(event, this, &quot;up&quot;)" href="vote?id=27974078&amp;how=up&amp;auth=022d375144d8f0f149ab08d91af7e321e64c47c5&amp;goto=item%3Fid%3D27972950#27974078"><div class="votearrow" title="upvote"></div></a></center>    </td><td class="default"><div style="margin-top:2px; margin-bottom:-10px;"><span class="comhead">
-          <a href="user?id=xcodevn" class="hnuser">xcodevn</a> <span class="age" title="2021-07-27T16:07:51"><a href="item?id=27974078">1 hour ago</a></span> <span id="unv_27974078"></span><span class="par"></span> <a class="togg" n="8" href="javascript:void(0)" onclick="return toggle(event, 27974078)">[–]</a>          <span class="storyon"></span>
-                  </span></div><br><div class="comment">
-                  <span class="commtext c00">"Analysing the agent’s internal representations, we can say that by taking this approach to reinforcement learning in a vast task space, our agents are aware of the basics of their bodies and the passage of time and that they understand the high-level structure of the games they encounter."<p>Wow, really amazing if true.</p><p>P.S.: After looking into their paper, it's not <i>that</i> impressive. They use agent's internal states (LSTM cells, attention outputs, etc.) to predict whether it is
-early in the episode, or whether the agent is holding an object.
-              </p><div class="reply">        <p><font size="1">
-                      <u><a href="reply?id=27974078&amp;goto=item%3Fid%3D27972950%2327974078">reply</a></u>
-                  </font>
-      </p></div></span></div></td></tr>
-        </tbody></table></td></tr>
-                <tr class="athing comtr" id="27974800"><td>
-                <table border="0">  <tbody><tr>    <td class="ind"><img src="s.gif" height="1" width="40"></td><td valign="top" class="votelinks">
-      <center><a id="up_27974800" onclick="return vote(event, this, &quot;up&quot;)" href="vote?id=27974800&amp;how=up&amp;auth=17cbebd2179cc4c91effd8dfeba0e17369ec66aa&amp;goto=item%3Fid%3D27972950#27974800"><div class="votearrow" title="upvote"></div></a></center>    </td><td class="default"><div style="margin-top:2px; margin-bottom:-10px;"><span class="comhead">
-          <a href="user?id=modeless" class="hnuser">modeless</a> <span class="age" title="2021-07-27T17:06:37"><a href="item?id=27974800">44 minutes ago</a></span> <span id="unv_27974800"></span><span class="par"></span> <a class="togg" n="1" href="javascript:void(0)" onclick="return toggle(event, 27974800)">[–]</a>          <span class="storyon"></span>
-                  </span></div><br><div class="comment">
-                  <span class="commtext c00">&gt; it's not that impressive. They use agent's internal states (LSTM cells, attention outputs, etc.) to predict whether it is early in the episode, or whether the agent is holding an object.<p>That seems like a decent definition of awareness to me. The agent has learned to encode information about time and its body in its internal state, which then influences its decisions. How else would you define awareness? Qualia or something?
-              </p><div class="reply">        <p><font size="1">
-                      <u><a href="reply?id=27974800&amp;goto=item%3Fid%3D27972950%2327974800">reply</a></u>
-                  </font>
-      </p></div></span></div></td></tr>
-        </tbody></table></td></tr>
-            <tr class="athing comtr" id="27974301"><td>
-                <table border="0">  <tbody><tr>    <td class="ind"><img src="s.gif" height="1" width="40"></td><td valign="top" class="votelinks">
-      <center><a id="up_27974301" onclick="return vote(event, this, &quot;up&quot;)" href="vote?id=27974301&amp;how=up&amp;auth=ea4a369728f0a1cdabd353254256aecd8b485849&amp;goto=item%3Fid%3D27972950#27974301"><div class="votearrow" title="upvote"></div></a></center>    </td><td class="default"><div style="margin-top:2px; margin-bottom:-10px;"><span class="comhead">
-          <a href="user?id=Tarq0n" class="hnuser">Tarq0n</a> <span class="age" title="2021-07-27T16:26:50"><a href="item?id=27974301">1 hour ago</a></span> <span id="unv_27974301"></span><span class="par"></span> <a class="togg" n="5" href="javascript:void(0)" onclick="return toggle(event, 27974301)">[–]</a>          <span class="storyon"></span>
-                  </span></div><br><div class="comment">
-                  <span class="commtext c00">"Aware" is probably overly anthropomorphized language there. What they mean to say is that all these things have become parameterized within the model.</span>
-              <div class="reply">        <p><font size="1">
-                      <u><a href="reply?id=27974301&amp;goto=item%3Fid%3D27972950%2327974301">reply</a></u>
-                  </font>
-      </p></div></div></td></tr>
-        </tbody></table></td></tr>
-                <tr class="athing comtr" id="27974413"><td>
-                <table border="0">  <tbody><tr>    <td class="ind"><img src="s.gif" height="1" width="80"></td><td valign="top" class="votelinks">
-      <center><a id="up_27974413" onclick="return vote(event, this, &quot;up&quot;)" href="vote?id=27974413&amp;how=up&amp;auth=2ef36d72ec76bea8859449d256c1da28ad292801&amp;goto=item%3Fid%3D27972950#27974413"><div class="votearrow" title="upvote"></div></a></center>    </td><td class="default"><div style="margin-top:2px; margin-bottom:-10px;"><span class="comhead">
-          <a href="user?id=jcims" class="hnuser">jcims</a> <span class="age" title="2021-07-27T16:34:49"><a href="item?id=27974413">1 hour ago</a></span> <span id="unv_27974413"></span><span class="par"></span> <a class="togg" n="2" href="javascript:void(0)" onclick="return toggle(event, 27974413)">[–]</a>          <span class="storyon"></span>
-                  </span></div><br><div class="comment">
-                  <span class="commtext c00">It would be interesting to see what would happen if they added social dynamics between the agents...like some space for theory of mind (what is that agent thinking), mimicry, communication, etc.</span>
-              <div class="reply">        <p><font size="1">
-                      <u><a href="reply?id=27974413&amp;goto=item%3Fid%3D27972950%2327974413">reply</a></u>
-                  </font>
-      </p></div></div></td></tr>
-        </tbody></table></td></tr>
-                <tr class="athing comtr" id="27975105"><td>
-                <table border="0">  <tbody><tr>    <td class="ind"><img src="s.gif" height="1" width="120"></td><td valign="top" class="votelinks">
-      <center><a id="up_27975105" onclick="return vote(event, this, &quot;up&quot;)" href="vote?id=27975105&amp;how=up&amp;auth=dd71d18983d0d99a9dbd60e288ee2a49de2155d6&amp;goto=item%3Fid%3D27972950#27975105"><div class="votearrow" title="upvote"></div></a></center>    </td><td class="default"><div style="margin-top:2px; margin-bottom:-10px;"><span class="comhead">
-          <a href="user?id=leesec" class="hnuser">leesec</a> <span class="age" title="2021-07-27T17:29:52"><a href="item?id=27975105">21 minutes ago</a></span> <span id="unv_27975105"></span><span class="par"></span> <a class="togg" n="1" href="javascript:void(0)" onclick="return toggle(event, 27975105)">[–]</a>          <span class="storyon"></span>
-                  </span></div><br><div class="comment">
-                  <span class="commtext c00">From the article: "Because the environment is multiplayer, we can examine the progression of agent behaviours while training on held-out social dilemmas, such as in a game of “chicken”. As training progresses, our agents appear to exhibit more cooperative behaviour when playing with a copy of themselves. Given the nature of the environment, it is difficult to pinpoint intentionality — the behaviours we see often appear to be accidental, but still we see them occur consistently."</span>
-              <div class="reply">        <p><font size="1">
-                      <u><a href="reply?id=27975105&amp;goto=item%3Fid%3D27972950%2327975105">reply</a></u>
-                  </font>
-      </p></div></div></td></tr>
-        </tbody></table></td></tr>
-                  <tr class="athing comtr" id="27974418"><td>
-                <table border="0">  <tbody><tr>    <td class="ind"><img src="s.gif" height="1" width="80"></td><td valign="top" class="votelinks">
-      <center><a id="up_27974418" onclick="return vote(event, this, &quot;up&quot;)" href="vote?id=27974418&amp;how=up&amp;auth=215db3cf0eae18ff5790f5c11c1b9ddeecf799ad&amp;goto=item%3Fid%3D27972950#27974418"><div class="votearrow" title="upvote"></div></a></center>    </td><td class="default"><div style="margin-top:2px; margin-bottom:-10px;"><span class="comhead">
-          <a href="user?id=jcelerier" class="hnuser">jcelerier</a> <span class="age" title="2021-07-27T16:35:08"><a href="item?id=27974418">1 hour ago</a></span> <span id="unv_27974418"></span><span class="par"></span> <a class="togg" n="2" href="javascript:void(0)" onclick="return toggle(event, 27974418)">[–]</a>          <span class="storyon"></span>
-                  </span></div><br><div class="comment">
-                  <span class="commtext c00">the main question of course being, aren't we anthropomorphizing ourselves too much ?</span>
-              <div class="reply">        <p><font size="1">
-                      <u><a href="reply?id=27974418&amp;goto=item%3Fid%3D27972950%2327974418">reply</a></u>
-                  </font>
-      </p></div></div></td></tr>
-        </tbody></table></td></tr>
-                <tr class="athing comtr" id="27974459"><td>
-                <table border="0">  <tbody><tr>    <td class="ind"><img src="s.gif" height="1" width="120"></td><td valign="top" class="votelinks">
-      <center><img src="s.gif" height="1" width="14"></center>    </td><td class="default"><div style="margin-top:2px; margin-bottom:-10px;"><span class="comhead">
-          <a href="user?id=Layke1123" class="hnuser">Layke1123</a> <span class="age" title="2021-07-27T16:38:56"><a href="item?id=27974459">1 hour ago</a></span> <span id="unv_27974459"></span> [dead] <span class="par"></span> <a class="togg" n="1" href="javascript:void(0)" onclick="return toggle(event, 27974459)">[–]</a>          <span class="storyon"></span>
-                  </span></div><br><div class="comment">
-                  <span class="commtext cdd">Asking the real questions that will upset alot of people. ;)</span>
-              <div class="reply">        <p><font size="1">
-                  </font>
-      </p></div></div></td></tr>
-        </tbody></table></td></tr>
-                        <tr class="athing comtr" id="27974887"><td>
-                <table border="0">  <tbody><tr>    <td class="ind"><img src="s.gif" height="1" width="40"></td><td valign="top" class="votelinks">
-      <center><img src="s.gif" height="1" width="14"></center>    </td><td class="default"><div style="margin-top:2px; margin-bottom:-10px;"><span class="comhead">
-          <a href="user?id=imvetri" class="hnuser">imvetri</a> <span class="age" title="2021-07-27T17:13:54"><a href="item?id=27974887">37 minutes ago</a></span> <span id="unv_27974887"></span> [dead] <span class="par"></span> <a class="togg" n="1" href="javascript:void(0)" onclick="return toggle(event, 27974887)">[–]</a>          <span class="storyon"></span>
-                  </span></div><br><div class="comment">
-                  <span class="commtext cdd">Haha. Thanks</span>
-              <div class="reply">        <p><font size="1">
-                  </font>
-      </p></div></div></td></tr>
-        </tbody></table></td></tr>
-                            <tr class="athing comtr" id="27973840"><td>
-                <table border="0">  <tbody><tr>    <td class="ind"><img src="s.gif" height="1" width="0"></td><td valign="top" class="votelinks">
-      <center><a id="up_27973840" onclick="return vote(event, this, &quot;up&quot;)" href="vote?id=27973840&amp;how=up&amp;auth=0ddaa08d82370601d838f32e4853af4e5d7a965b&amp;goto=item%3Fid%3D27972950#27973840"><div class="votearrow" title="upvote"></div></a></center>    </td><td class="default"><div style="margin-top:2px; margin-bottom:-10px;"><span class="comhead">
-          <a href="user?id=yetihehe" class="hnuser">yetihehe</a> <span class="age" title="2021-07-27T15:48:55"><a href="item?id=27973840">2 hours ago</a></span> <span id="unv_27973840"></span><span class="par"></span> <a class="togg" n="1" href="javascript:void(0)" onclick="return toggle(event, 27973840)">[–]</a>          <span class="storyon"></span>
-                  </span></div><br><div class="comment">
-                  <span class="commtext c00">"I was set upon this world to try and [outsmart] you, but this, is what I've become." - Beyond the walls of Eryx.</span>
-              <div class="reply">        <p><font size="1">
-                      <u><a href="reply?id=27973840&amp;goto=item%3Fid%3D27972950%2327973840">reply</a></u>
-                  </font>
-      </p></div></div></td></tr>
-        </tbody></table></td></tr>
-                </tbody></table>
-      <br><br>
-  </td>
+    <tbody>
+      <% @comment_tree.each_with_index do |node, ind| %>
+        <% comment = node[:comment] %>
+        <% depth = node[:depth] %>
+        <tr class="athing comtr">
+          <td>
+            <table border="0">
+              <tbody>
+                <tr>
+                  <td class="ind">
+                    <img src="s.gif" height="1" width="<%= 40 * depth %>">
+                  </td>
+                <td valign="top" class="votelinks">
+                  <center>
+                    <a onclick="return false" href="">
+                      <div class="votearrow" title="upvote"></div>
+                    </a>
+                  </center>
+                </td>
+              <td class="default">
+                <div style="margin-top:2px; margin-bottom:-10px;">
+                  <span class="comhead">
+                    <a href="/user/<%= comment.user.id %>" class="hnuser">
+                      <%= comment.user.name %>
+                    </a>
+                    <span class="age">
+                      <a href="/comments/<%= comment.id %>"><%= time_ago_in_words(comment.created_at) %></a>
+                    </span>
+                  </span>
+                </div>
+                <br>
+                <div class="comment">
+                  <span class="commtext c00">
+                    <%= comment.content %>
+                      <div class="reply">
+                        <p>
+                          <font size="1">
+                            <u>
+                              <a href="/comments/<%= comment.id %>">reply</a>
+                            </u>
+                          </font>
+                        </p>
+                      </div>
+                    </span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <% end %>
+      </tbody>
+  </table>
+  <br><br>
+</td>

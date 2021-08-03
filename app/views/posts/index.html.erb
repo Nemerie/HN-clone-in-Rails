@@ -30,9 +30,10 @@
             <span class="age">
               <a href="posts/<%= post.id %>"><%= time_ago_in_words(post.created_at) %> ago</a>
             </span> 
-            <span></span>
           | hide
-          | <a href="posts/<%= post.id %>">comments</a>
+          | <a href="posts/<%= post.id %>">
+              <%= pluralize(post.comment_count, 'comment') %>
+            </a>
           </td>
         </tr>
 
