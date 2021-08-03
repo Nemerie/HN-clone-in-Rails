@@ -46,7 +46,7 @@ class PostsController < ApplicationController
         flat_comments.push(current_candidate) unless current_candidate.nil?
 
         selected = comments.select do |comment|
-          comment.comment_id == (current_candidate.nil? ? nil : current_candidate.id)
+          comment.parent_id == (current_candidate.nil? ? nil : current_candidate.id)
         end
 
         selected.reverse.each do |c|
@@ -60,7 +60,7 @@ class PostsController < ApplicationController
       tree = []
 
       flat_comments.each do |c|
-        until c.comment_id == stack_of_previous.last
+        until c.parent_id == stack_of_previous.last
           stack_of_previous.pop
           depth -= 1
         end

@@ -20,7 +20,7 @@ class CommentTest < ActiveSupport::TestCase
   end
 
   test "parent comment id might be present" do
-    @comment.comment_id = Comment.first.id
+    @comment.parent_id = Comment.first.id
     assert @comment.valid?
   end
 
