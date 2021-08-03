@@ -18,7 +18,8 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all
+    @page = params[:page] || 1
+    @posts = Post.paginate(page: @page, per_page: 30)
   end
 
   def destroy
