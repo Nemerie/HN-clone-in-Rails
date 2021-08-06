@@ -13,9 +13,9 @@
             <td colspan="2"></td>
             <td>
               Go back a
-              <span class="hnmore"><%= link_to "day", "/posts/past?date=#{@date.prev_day}" %></span>.
+              <span class="hnmore"><%= link_to "day", "/posts?date=#{@date.prev_day}" %></span>.
               Go forward a
-              <span class="hnmore"><%= link_to "day", "/posts/past?date=#{@date.next_day}" %></span>.
+              <span class="hnmore"><%= link_to "day", "/posts?date=#{@date.next_day}" %></span>.
             </td>
           </tr>
           <tr style="height:14px"></tr>

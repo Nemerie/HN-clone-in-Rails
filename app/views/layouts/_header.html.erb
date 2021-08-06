@@ -12,7 +12,7 @@
             <span class="pagetop">
               <b class="hnname"><%= link_to "Hacker News", "/" %></b>
               <%= link_to "new", "/" %>
-            | <%= link_to "past", "/posts/past" %>
+            | <%= link_to "past", "/posts?date=#{Date.yesterday}" %>
             | comments
             | ask
             | show
@@ -23,7 +23,7 @@
           <td style="text-align:right;padding-right:4px;">
             <span class="pagetop">
             <% if current_user %>
-              <%= link_to current_user.name, me_path %> | <%= link_to 'logout', logout_path, method: :delete %>
+              <%= link_to current_user.name, "/users/#{current_user.id}" %> | <%= link_to 'logout', logout_path, method: :delete %>
             <% else %>
               <%= link_to 'login', login_path %>
             <% end %>

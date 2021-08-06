@@ -1,0 +1,28 @@
+<tr id="pagespace" style="height:10px"></tr>
+<tr>
+  <td>
+    <table border="0">
+      <tbody>
+        <tr class="athing">
+          <td valign="top">user:</td>
+          <td><%= @user.name %></td>
+        </tr>
+        <tr>
+          <td valign="top">created:</td>
+          <td><%= @user.created_at %></td>
+        </tr>
+        <tr>
+          <td>
+            <%= link_to "submissions", "/posts?user_id=#{@user.id}" %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= link_to "comments", "/comments?user_id=#{@user.id}" %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br><br>
+  </td>
+</tr>

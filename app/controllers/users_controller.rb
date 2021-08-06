@@ -19,11 +19,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    if current_user.nil?
-      redirect_to login_path
-    end
-
-    @user = current_user
+    @user = User.find_by(id: params[:id])
   end
 
 private

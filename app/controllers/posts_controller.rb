@@ -16,9 +16,27 @@ class PostsController < ApplicationController
     @comment_tree = comment_tree(Comment.where(post_id: @post.id).order('created_at DESC')) 
   end
 
-  def index()
+  def index
+    conditions = {}
+
+    if params[:date]
+      begin
+        @date = Date.parse(params[:date])
+        conditions[:created_at] = @date.beginning_of_day..@date.end_of_day
+      rescue ArgumentError
+        @date = Date.today
+      end
+    end
+
+    if params[:user_id]
+      user_id = params[:user_id]
+      @username = User.find_by(id: user_id)
+      conditions[:user_id] = user_id
+    end
+
     @page = params[:page] || 1
-    @posts = Post.order('created_at DESC').paginate(page: @page, per_page: 30)
+
+    @posts = Post.where(conditions).order('created_at DESC').paginate(page: @page, per_page: 30)
   end
 
   def past
