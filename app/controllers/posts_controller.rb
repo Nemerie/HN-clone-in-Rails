@@ -16,9 +16,25 @@ class PostsController < ApplicationController
     @comment_tree = comment_tree(Comment.where(post_id: @post.id).order('created_at DESC')) 
   end
 
-  def index
+  def index()
     @page = params[:page] || 1
     @posts = Post.order('created_at DESC').paginate(page: @page, per_page: 30)
+  end
+
+  def past
+    date = params[:date] || Date.today
+
+    @date = begin
+      Date.parse(date.to_s)
+    rescue ArgumentError
+      Date.today
+    end
+
+    @page = params[:page] || 1 
+    @posts = Post.where(:created_at => (@date.beginning_of_day..@date.end_of_day))
+                 .order('created_at DESC').paginate(page: @page, per_page: 30)
+
+    render :index
   end
 
   def upvote

@@ -3,6 +3,23 @@
 	<td>
 		<table border="0" cellpadding="0" cellspacing="0" class="itemlist">
       <tbody>
+        <% unless @date.nil? %>
+          <tr>
+            <td colspan="2"></td>
+            <td>Stories from <%= @date %></td>
+          </tr>
+          <tr style="height:9px"></tr>
+          <tr>
+            <td colspan="2"></td>
+            <td>
+              Go back a
+              <span class="hnmore"><%= link_to "day", "/posts/past?date=#{@date.prev_day}" %></span>.
+              Go forward a
+              <span class="hnmore"><%= link_to "day", "/posts/past?date=#{@date.next_day}" %></span>.
+            </td>
+          </tr>
+          <tr style="height:14px"></tr>
+        <% end %>
         <% @posts.each_with_index do |post, index| %>
           <tr class="athing">
       		  <td align="right" valign="top" class="title">

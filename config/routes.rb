@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 	get    '/submit',              to: 'posts#new'
 	post   '/submit',              to: 'posts#create'
 	get    '/posts',               to: 'posts#index'
+	get    '/posts/past',          to: 'posts#past'
 	get    '/posts/:id',           to: 'posts#show'
 	post   '/posts/:id/upvote',    to: 'posts#upvote'
 	get    '/comments/:id',        to: 'comments#show'
