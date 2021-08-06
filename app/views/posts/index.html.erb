@@ -20,7 +20,10 @@
               <a href="<%= post.url.to_s %>" class="storylink">
                 <%= post.title %>
               </a>
-      			  <span class="sitebit comhead">(<span class="sitestr"><%= URI(post.url).host %></span>)</span>
+      			  <span class="sitebit comhead">(<span class="sitestr"><%=
+                host = URI(post.url).host
+                host.start_with?("www.") ? host[4..-1] : host
+              %></span>)</span>
       		  </td>
       	  </tr>
 
