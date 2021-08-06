@@ -1,6 +1,5 @@
 class PostsController < ApplicationController
-  #before_action :logged_in_user, only: [:create, :destroy]
-  before_action :correct_user,   only: :destroy
+  before_action :logged_in_user, only: [:upvote, :create]
 
   def new
   end
@@ -45,6 +44,16 @@ class PostsController < ApplicationController
       redirect_to root_url if @post.nil?
     end
 
+    # transform a tree of comments:
+    # A
+    #   B
+    #     C
+    #     D
+    #   E
+    #   F
+    # into a list sorted from top to down:
+    # [A, B, C, D, E, F]
+    # where every comment is wraped as {comment: Comment, depth: Integer}
     def comment_tree(comments)
       candidates = [nil]
       flat_comments = []

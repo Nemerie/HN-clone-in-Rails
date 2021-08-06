@@ -1,11 +1,5 @@
-<% if notice %>
-  <%= notice %>
-<% end %>
-	
-<% if alert %>
-  <%= alert %>
-  <br>
-  <br>
+<% flash.each do |message_type, message| %>
+  <div class="alert alert-<%= message_type %>"><%= message %></div>
 <% end %>
 
 <b>Login</b>
