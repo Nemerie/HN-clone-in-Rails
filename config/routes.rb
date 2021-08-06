@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 	get    '/posts',               to: 'posts#index'
 	get    '/posts/:id',           to: 'posts#show'
 	post   '/posts/:id/upvote',    to: 'posts#upvote'
+	get    '/comments',            to: 'comments#index'
 	get    '/comments/:id',        to: 'comments#show'
 	post   '/comments/new',        to: 'comments#create'
 	post   '/comments/:id/upvote', to: 'comments#upvote'

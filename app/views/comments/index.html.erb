@@ -1,0 +1,42 @@
+<tr id="pagespace" style="height:10px"></tr>
+<tr class="athing comtr">
+  <td>
+    <table border="0">
+      <tbody>
+        <% @comments.each do |comment| %>
+          <tr class="athing">
+            <td class="ind"></td>
+            <td valign="top" class="votelinks">
+              <center>
+                <%= link_to content_tag(:div, '', class: "votearrow", title: "upvote"),
+                            "/comments/#{comment.id}/upvote", method: :post %>
+              </center>
+            </td>
+            <td class="default">
+              <div style="margin-top:2px; margin-bottom:-10px;">
+                <span class="comhead">
+                  <%= pluralize(comment.votes_count, 'point') %> by
+                  <%= link_to comment.user.name, "/users/#{comment.user.id}", class: "hnuser" %>
+                  <span class="age">
+                    <%= link_to time_ago_in_words(comment.created_at) + " ago", "/comments/#{comment.id}" %>
+                  </span>
+                  <span class="storyon"> on:
+                    <%= link_to comment.post.title, "/posts/#{comment.post.id}" %>
+                  </span>
+                </span>
+              </div>
+              <br>
+              <div class="comment">
+                <span class="commtext c00">
+                  <%= comment.content %>
+                  <div class="reply"></div>
+                </span>
+              </div>
+            </td>
+          </tr>
+          <tr style="height:10px"></tr>
+        <% end %>
+      </tbody>
+    </table>
+  </td>
+</tr>

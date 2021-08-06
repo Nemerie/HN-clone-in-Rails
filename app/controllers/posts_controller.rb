@@ -35,7 +35,6 @@ class PostsController < ApplicationController
     end
 
     @page = params[:page] || 1
-
     @posts = Post.where(conditions).order('created_at DESC').paginate(page: @page, per_page: 30)
   end
 

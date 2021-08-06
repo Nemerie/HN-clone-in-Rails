@@ -13,6 +13,19 @@ class CommentsController < ApplicationController
     redirect_to "/posts/#{post.id}"
   end
 
+  def index
+    conditions = {}
+
+    if params[:user_id]
+      user_id = params[:user_id]
+      @username = User.find_by(id: user_id)
+      conditions[:user_id] = user_id
+    end
+
+    @page = params[:page] || 1
+    @comments = Comment.where(conditions).order('created_at DESC').paginate(page: @page, per_page: 30)
+  end
+
   def upvote
     votable = {type: 'Comment', id: params[:id]}
 
