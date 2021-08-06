@@ -11,6 +11,6 @@ class Comment < ApplicationRecord
   has_many :votes, as: :votable
 
   def votes_count
-    votes.length
+    votes.length + points
   end
 end
