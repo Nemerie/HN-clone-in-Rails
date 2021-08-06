@@ -1,9 +1,10 @@
 module ApplicationHelper
-  class List
-    def each_in_tree_with_index
-      return nil unless block_given?
-
-      self.each
+  def host_of_url(url)
+    host = URI(url).host
+    if host.start_with?("www.")
+      host[4..-1]
+    else
+      host
     end
   end
 end

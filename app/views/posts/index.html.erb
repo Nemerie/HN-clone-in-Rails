@@ -17,39 +17,31 @@
               </center>
             </td>
       		  <td class="title">
-              <a href="<%= post.url.to_s %>" class="storylink">
-                <%= post.title %>
-              </a>
-      			  <span class="sitebit comhead">(<span class="sitestr"><%=
-                host = URI(post.url).host
-                host.start_with?("www.") ? host[4..-1] : host
-              %></span>)</span>
+              <%= link_to post.title, post.url.to_s, class: "storylink" %>
+      			  <span class="sitebit comhead">(<span class="sitestr"><%= host_of_url(post.url) %></span>)</span>
       		  </td>
       	  </tr>
 
           <tr>
-          <td colspan="2"></td>
-          <td class="subtext"> 
-            <%= pluralize(post.votes_count, 'point') %>
-            <a href="users/<%= post.user.id %>" class="hnuser">by <%= post.user.name %></a> 
-            <span class="age">
-              <a href="posts/<%= post.id %>"><%= time_ago_in_words(post.created_at) %> ago</a>
-            </span> 
-          | hide
-          | <a href="posts/<%= post.id %>">
-              <%= pluralize(post.comment_count, 'comment') %>
-            </a>
-          </td>
-        </tr>
+            <td colspan="2"></td>
+            <td class="subtext"> 
+              <%= pluralize(post.votes_count, 'point') %>
+              <%= link_to "by " + post.user.name, "/users/#{post.user.id}", class: "hnuser" %>
+              <span class="age">
+                <%= link_to time_ago_in_words(post.created_at) + " ago", "/posts/#{post.id}" %>
+              </span>
+            | <%= link_to pluralize(post.comment_count, 'comment'), "/posts/#{post.id}" %>
+            </td>
+          </tr>
 
-        <tr class="morespace" style="height:10px"></tr>
+          <tr class="morespace" style="height:10px"></tr>
 
         <% end %>
 
         <tr>
           <td colspan="2"></td>
           <td class="title">
-            <a href="/posts?page=<%= (@page.to_i + 1).to_s %>" class="morelink" rel="next">More</a>
+            <%= link_to "More", "/posts?page=#{(@page.to_i + 1).to_s}", class: "morelink" %>
           </td>
         </tr>
 			</tbody>

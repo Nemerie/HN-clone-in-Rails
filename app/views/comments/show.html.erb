@@ -6,26 +6,20 @@
           <td class="ind"></td>
           <td valign="top" class="votelinks">
             <center>
-              <a onclick="false" href="">
-                <div class="votearrow" title="upvote"></div>
-              </a>
+              <%= link_to content_tag(:div, '', class: "votearrow", title: "upvote"),
+                          "/comments/#{@comment.id}/upvote", method: :post %>
             </center>
           </td>
           <td class="default">
             <div style="margin-top:2px; margin-bottom:-10px;">
               <span class="comhead">
-                <a href="/users/<%= @comment.user.id %>" class="hnuser">
-                  <%= @comment.user.name %>
-                </a>
-                <span class="age" title="2021-08-02T13:33:14">
-                  <a href="/comments/<%= @comment.id %>">
-                    <%= time_ago_in_words(@comment.created_at) %> ago
-                  </a>
+                <%= pluralize(@comment.votes_count, 'point') %> by
+                <%= link_to @comment.user.name, "/users/#{@comment.user.id}", class: "hnuser" %>
+                <span class="age">
+                  <%= link_to time_ago_in_words(@comment.created_at) + " ago", "/comments/#{@comment.id}" %>
                 </span>
                 <span class="storyon"> on:
-                  <a href="/posts/<%= @comment.post.id %>">
-                    <%= @comment.post.title %>
-                  </a>
+                  <%= link_to @comment.post.title, "/posts/#{@comment.post.id}" %>
                 </span>
               </span>
             </div>
@@ -43,8 +37,8 @@
           <td colspan="2"></td>
           <td>
             <%= form_with(url: '/comments/new', local: true) do |f| %>
-              <input type="hidden" name="post" value="<%= @comment.post.id %>" />
-              <input type="hidden" name="parent" value="<%= @comment.id %>" />
+              <%= hidden_field_tag "post", @comment.post.id %>
+              <%= hidden_field_tag "parent", @comment.id %>
               <%= f.text_area :content, rows: "6", cols: "60" %>
               <br><br>
               <%= f.submit "submit" %>

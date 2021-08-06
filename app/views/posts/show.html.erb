@@ -13,10 +13,8 @@
           </center>
         </td>
         <td class="title">
-          <a href="/<%= @post.url.to_s %>" class="storylink">
-            <%= @post.title %>
-          </a>
-          <span class="sitebit comhead">(<span class="sitestr"><%= URI(@post.url).host %></span>)</span>
+          <%= link_to @post.title, @post.url.to_s, class: "storylink" %>
+          <span class="sitebit comhead">(<span class="sitestr"><%= host_of_url(@post.url) %></span>)</span>
         </td>
       </tr>
       
@@ -25,21 +23,10 @@
         <td class="subtext">
           <%= pluralize(@post.votes_count, 'point') %>
           by
-          <a href="/<%= @post.user.id %>" class="hnuser">
-            <font color="#3c963c">
-              <%= @post.user.name %>
-            </font>
-          </a>
-          <span class="age" title="2021-07-27T14:36:50">
-            <a href="/<%= @post.id %>">
-              <%= time_ago_in_words(@post.created_at) %> ago
-            </a>
+          <%= link_to @post.user.name, "/users/#{@post.user.id}", class: "hnuser" %>
+          <span class="age">
+            <%= link_to time_ago_in_words(@post.created_at) + " ago", "/posts/#{@post.id}" %>
           </span>
-          <span id="unv_27972950"></span>
-          | <a href="">hide</a>
-          | <a href="" class="hnpast">past</a>
-          | <a href="">favorite</a>
-          | <a href="">comments</a>
         </td>
       </tr>
       
@@ -48,7 +35,7 @@
         <td colspan="2"></td>
         <td>
           <%= form_with(model: @comment, url: '/comments/new', local: true) do |f| %>
-            <input type="hidden" name="post" value="<%= @post.id %>" />
+            <%= hidden_field_tag "post", @post.id %>
             <%= f.text_area :content, rows: "6", cols: "60" %>
             <br><br>
             <%= f.submit "submit" %>
@@ -83,11 +70,9 @@
                 <div style="margin-top:2px; margin-bottom:-10px;">
                   <span class="comhead">
                     <%= pluralize(comment.votes_count, 'point') %> by
-                    <a href="/user/<%= comment.user.id %>" class="hnuser">
-                      <%= comment.user.name %>
-                    </a>
+                    <%= link_to comment.user.name, "/user/#{comment.user.id}", class: "hnuser" %>
                     <span class="age">
-                      <a href="/comments/<%= comment.id %>"><%= time_ago_in_words(comment.created_at) %></a>
+                      <%= link_to time_ago_in_words(comment.created_at) + " ago", "/comments/#{comment.id}" %>
                     </span>
                   </span>
                 </div>
@@ -99,7 +84,7 @@
                         <p>
                           <font size="1">
                             <u>
-                              <a href="/comments/<%= comment.id %>">reply</a>
+                              <%= link_to "reply", "/comments/#{comment.id}" %>
                             </u>
                           </font>
                         </p>
