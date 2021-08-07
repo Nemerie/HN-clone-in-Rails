@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 # nethttp.rb
 require 'uri'
 require 'net/http'
 require 'json'
-
 
 res = Net::HTTP.get_response(URI('https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty'))
 unless res.is_a?(Net::HTTPSuccess)
@@ -31,13 +32,13 @@ def create_comment(comment_id, parent_id, post_id)
   return unless res.is_a?(Net::HTTPSuccess)
 
   comment = JSON.parse(res.body)
-  user = find_or_creat_user(comment["by"])
-  created_comment = user.comments.build({content: comment["text"], post_id: post_id, parent_id: parent_id, points: 0})
+  user = find_or_creat_user(comment['by'])
+  created_comment = user.comments.build({ content: comment['text'], post_id: post_id, parent_id: parent_id, points: 0 })
 
   return unless created_comment.save
-  return if comment["kids"].nil?
+  return if comment['kids'].nil?
 
-  comment["kids"].each do |child_id|
+  comment['kids'].each do |child_id|
     create_comment(child_id, created_comment.id, post_id)
   end
 end
@@ -48,14 +49,13 @@ topstories.each do |post_id|
   next unless res.is_a?(Net::HTTPSuccess)
 
   post = JSON.parse(res.body)
-  user = find_or_creat_user(post["by"])
-  created_post = user.posts.build({title: post["title"], url: post["url"], points: post["score"]})
+  user = find_or_creat_user(post['by'])
+  created_post = user.posts.build({ title: post['title'], url: post['url'], points: post['score'] })
 
   next unless created_post.save
-  next if post["kids"].nil?
+  next if post['kids'].nil?
 
-  post["kids"].each do |child_id|
+  post['kids'].each do |child_id|
     create_comment(child_id, nil, created_post.id)
   end
-
 end

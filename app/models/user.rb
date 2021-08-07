@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   has_many :posts
   has_many :comments
@@ -7,7 +9,7 @@ class User < ApplicationRecord
 
   has_secure_password
 
-	validates :name, presence: true,
+  validates :name, presence: true,
                    uniqueness: true,
                    length: { maximum: 25 }
 
@@ -25,13 +27,14 @@ class User < ApplicationRecord
   def upvoted?(votable)
     votes.exists?(upvote: 1, votable_type: votable[:type], votable_id: votable[:id])
   end
-  
+
   def remove_vote(votable)
     votes.find_by(votable_type: votable[:type], votable_id: votable[:id]).destroy
   end
 
   private
-    def downcase_email
-      self.email = email.downcase
-    end
+
+  def downcase_email
+    self.email = email.downcase
+  end
 end
