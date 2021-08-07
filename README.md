@@ -1,24 +1,8 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+https://hn-clone-ror.herokuapp.com/
 
-Things you may want to cover:
+Hacker News clone written in Ruby on Rails with educational purposes.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+The frontend is taken directly from https://news.ycombinator.com/
+The database is seeded with data from some data from https://github.com/HackerNews/API
