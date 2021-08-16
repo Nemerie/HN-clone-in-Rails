@@ -25,7 +25,7 @@ class CommentsController < ApplicationController
     end
 
     @page = params[:page] || 1
-    @comments = Comment.where(conditions).order('created_at DESC').paginate(page: @page, per_page: 30)
+    @comments = Comment.includes(:user, :votes).where(conditions).order('created_at DESC').paginate(page: @page, per_page: 30)
   end
 
   def upvote

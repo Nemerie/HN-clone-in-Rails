@@ -12,7 +12,8 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find_by(id: params[:id])
-    @comment_tree = comment_tree(Comment.where(post_id: @post.id).order('created_at DESC'))
+    comments = Comment.includes(:user, :votes).where(post_id: @post.id).order('created_at DESC')
+    @comment_tree = comment_tree(comments)
   end
 
   def index
@@ -34,7 +35,10 @@ class PostsController < ApplicationController
     end
 
     @page = params[:page] || 1
-    @posts = Post.where(conditions).order('created_at DESC').paginate(page: @page, per_page: 30)
+    @posts = Post.includes(:votes, :comments, :user)
+                 .where(conditions)
+                 .order('created_at DESC')
+                 .paginate(page: @page, per_page: 30)
   end
 
   def past
@@ -47,7 +51,8 @@ class PostsController < ApplicationController
     end
 
     @page = params[:page] || 1
-    @posts = Post.where(created_at: (@date.beginning_of_day..@date.end_of_day))
+    @posts = Post.includes(:votes, :comments, :user)
+                 .where(created_at: (@date.beginning_of_day..@date.end_of_day))
                  .order('created_at DESC').paginate(page: @page, per_page: 30)
 
     render :index
