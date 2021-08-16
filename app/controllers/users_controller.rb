@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
 
-    @user.email.downcase! unless @user.email.nil?
+    @user.email&.downcase!
 
     if @user.save
       log_in @user

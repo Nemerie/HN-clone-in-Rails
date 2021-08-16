@@ -8,9 +8,9 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     @post = posts(:example_post)
   end
 
-  test "should redirect create when not logged in" do
+  test 'should redirect create when not logged in' do
     assert_no_difference 'Comment.count' do
-      post comments_new_path, params: { content: "random content",
+      post comments_new_path, params: { content: 'random content',
                                         post: @post,
                                         parent: @comment }
     end

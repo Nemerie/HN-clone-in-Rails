@@ -7,10 +7,10 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     @post = posts(:example_post)
   end
 
-  test "should redirect create when not logged in" do
+  test 'should redirect create when not logged in' do
     assert_no_difference 'Post.count' do
-      post submit_path, params: { post: { title: "test title",
-                                          url: "https://testurl.com" } }
+      post submit_path, params: { post: { title: 'test title',
+                                          url: 'https://testurl.com' } }
     end
     assert_redirected_to login_url
   end
